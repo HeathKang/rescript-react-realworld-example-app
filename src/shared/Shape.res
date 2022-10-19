@@ -220,20 +220,20 @@ module User = {
         ->Dict.get("id")
         ->Option.flatMap(Json.decodeNumber)
         ->Option.map(int_of_float)
-        ->Option.getExn
+        ->Option.getWithDefault(1)
       let email = obj->Dict.get("email")->Option.flatMap(Json.decodeString)->Option.getExn
       let createdAt =
         obj
         ->Dict.get("createdAt")
         ->Option.flatMap(Json.decodeString)
         ->Option.map(Js.Date.fromString)
-        ->Option.getExn
+        ->Option.getWithDefault(Js.Date.make())
       let updatedAt =
         obj
         ->Dict.get("updatedAt")
         ->Option.flatMap(Json.decodeString)
         ->Option.map(Js.Date.fromString)
-        ->Option.getExn
+        ->Option.getWithDefault(Js.Date.make())
       let username = obj->Dict.get("username")->Option.flatMap(Json.decodeString)->Option.getExn
       let bio = obj->Dict.get("bio")->Option.flatMap(Json.decodeString)
       let image = obj->Dict.get("image")->Option.flatMap(Json.decodeString)
